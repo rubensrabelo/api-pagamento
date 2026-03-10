@@ -1,0 +1,13 @@
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: api_pagamento_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: api_pagamento
+      MYSQL_USER: adonis
+      MYSQL_PASSWORD: adonis
+    ports:
+      - "3306:3306"
