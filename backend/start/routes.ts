@@ -41,5 +41,6 @@ router
       })
       .prefix('products')
       .as('products')
+      .use(middleware.auth())
   })
   .prefix('/api/v1')
