@@ -42,5 +42,17 @@ router
       .prefix('products')
       .as('products')
       .use(middleware.auth())
+    
+    router
+      .group(() => {
+        router.get('/', [controllers.Client, 'index'])
+        router.get('/:id', [controllers.Client, 'show'])
+        router.post('/', [controllers.Client, 'store'])
+        router.put('/:id', [controllers.Client, 'update'])
+        router.delete('/:id', [controllers.Client, 'destroy'])
+      })
+      .prefix('clients')
+      .as('clients')
+      .use(middleware.auth())
   })
   .prefix('/api/v1')

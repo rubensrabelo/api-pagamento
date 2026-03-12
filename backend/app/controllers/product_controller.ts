@@ -10,11 +10,12 @@ export default class ProductsController {
     return serialize(ProductTransformer.transform(products))
   }
 
-  async store({ request, serialize }: HttpContext) {
+  async store({ request, response, serialize }: HttpContext) {
     const data = await request.validateUsing(createProductValidator)
 
     const product = await Product.create(data)
 
+    response.status(201)
     return serialize(ProductTransformer.transform(product))
   }
 }

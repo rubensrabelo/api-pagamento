@@ -42,6 +42,36 @@ const routes = {
     tokens: [{"old":"/api/v1/products","type":0,"val":"api","end":""},{"old":"/api/v1/products","type":0,"val":"v1","end":""},{"old":"/api/v1/products","type":0,"val":"products","end":""}],
     types: placeholder as Registry['products.product.store']['types'],
   },
+  'clients.client.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/clients',
+    tokens: [{"old":"/api/v1/clients","type":0,"val":"api","end":""},{"old":"/api/v1/clients","type":0,"val":"v1","end":""},{"old":"/api/v1/clients","type":0,"val":"clients","end":""}],
+    types: placeholder as Registry['clients.client.index']['types'],
+  },
+  'clients.client.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/clients/:id',
+    tokens: [{"old":"/api/v1/clients/:id","type":0,"val":"api","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"clients","end":""},{"old":"/api/v1/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['clients.client.show']['types'],
+  },
+  'clients.client.store': {
+    methods: ["POST"],
+    pattern: '/api/v1/clients',
+    tokens: [{"old":"/api/v1/clients","type":0,"val":"api","end":""},{"old":"/api/v1/clients","type":0,"val":"v1","end":""},{"old":"/api/v1/clients","type":0,"val":"clients","end":""}],
+    types: placeholder as Registry['clients.client.store']['types'],
+  },
+  'clients.client.update': {
+    methods: ["PUT"],
+    pattern: '/api/v1/clients/:id',
+    tokens: [{"old":"/api/v1/clients/:id","type":0,"val":"api","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"clients","end":""},{"old":"/api/v1/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['clients.client.update']['types'],
+  },
+  'clients.client.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/clients/:id',
+    tokens: [{"old":"/api/v1/clients/:id","type":0,"val":"api","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"clients","end":""},{"old":"/api/v1/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['clients.client.destroy']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

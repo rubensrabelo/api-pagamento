@@ -79,4 +79,64 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/product_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'clients.client.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/clients'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client_controller').default['index']>>>
+    }
+  }
+  'clients.client.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/clients/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client_controller').default['show']>>>
+    }
+  }
+  'clients.client.store': {
+    methods: ["POST"]
+    pattern: '/api/v1/clients'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/client_validator').createClientValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/client_validator').createClientValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'clients.client.update': {
+    methods: ["PUT"]
+    pattern: '/api/v1/clients/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/client_validator').updateClientValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/client_validator').updateClientValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'clients.client.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/clients/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client_controller').default['destroy']>>>
+    }
+  }
 }

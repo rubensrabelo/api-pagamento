@@ -22,4 +22,13 @@ export interface ApiDefinition {
       store: typeof routes['products.product.store']
     }
   }
+  clients: {
+    client: {
+      index: typeof routes['clients.client.index']
+      show: typeof routes['clients.client.show']
+      store: typeof routes['clients.client.store']
+      update: typeof routes['clients.client.update']
+      destroy: typeof routes['clients.client.destroy']
+    }
+  }
 }
