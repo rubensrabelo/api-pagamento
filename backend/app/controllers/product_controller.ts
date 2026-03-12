@@ -1,5 +1,5 @@
 import Product from '#models/product'
-import { createProductValidator } from '#validators/product'
+import { createProductValidator } from '#validators/product_validator'
 import ProductTransformer from '#transformers/product_transformer'
 import type { HttpContext } from '@adonisjs/core/http'
 

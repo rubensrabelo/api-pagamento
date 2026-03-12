@@ -4,7 +4,9 @@
  * Run "node ace migration:run" command to re-generate this file
  */
 
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import TransactionProduct from '#models/transaction_product'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
 
 export class AuthAccessTokenSchema extends BaseModel {
@@ -77,6 +79,49 @@ export class ProductSchema extends BaseModel {
   declare name: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+}
+
+export class TransactionProductSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'productId', 'quantity', 'transactionId', 'updatedAt'] as const
+  $columns = TransactionProductSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare productId: number
+  @column()
+  declare quantity: number
+  @column()
+  declare transactionId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class TransactionSchema extends BaseModel {
+  static $columns = ['amount', 'cardLastNumbers', 'clientId', 'createdAt', 'externalId', 'gateway', 'id', 'status', 'updatedAt'] as const
+  $columns = TransactionSchema.$columns
+  @column()
+  declare amount: number
+  @column()
+  declare cardLastNumbers: string | null
+  @column()
+  declare clientId: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare externalId: string | null
+  @column()
+  declare gateway: string
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare status: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+
+  @hasMany(() => TransactionProduct, { foreignKey: 'transactionId' })
+  declare products?: HasMany<typeof TransactionProduct>
 }
 
 export class UserSchema extends BaseModel {

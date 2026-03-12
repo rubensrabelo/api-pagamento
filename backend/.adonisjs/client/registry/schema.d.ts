@@ -71,10 +71,10 @@ export interface Registry {
     methods: ["POST"]
     pattern: '/api/v1/products'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/product').createProductValidator)>>
+      body: ExtractBody<InferInput<(typeof import('#validators/product_validator').createProductValidator)>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#validators/product').createProductValidator)>>
+      query: ExtractQuery<InferInput<(typeof import('#validators/product_validator').createProductValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/product_controller').default['store']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/product_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }

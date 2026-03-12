@@ -2,7 +2,7 @@ import { IGateway } from "./interfaces/IGateway.ts"
 import { ChargeResponse, RefundResponse } from "./interfaces/IGatewayResponse.ts"
 
 export class Gateway1 implements IGateway {
-  private baseUrl = 'http://localhost:3002'
+  private baseUrl = 'http://localhost:3001'
   private headers = {
     'Gateway-Auth-Token': 'tk_f2198cc671b5289fa856',
     'Gateway-Auth-Secret': '3d15e8ed6131446ea7e3456728b1211f',
