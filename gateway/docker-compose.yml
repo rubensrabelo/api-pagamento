@@ -1,0 +1,25 @@
+services:
+
+  gateway1:
+    build: .
+    container_name: gateway1
+    environment:
+      PORT: ${GATEWAY1_PORT}
+      GATEWAY_NAME: ${GATEWAY1_NAME}
+      FAIL_RATE: ${GATEWAY1_FAIL_RATE}
+      TOKEN: ${TOKEN}
+      SECRET: ${SECRET}
+    ports:
+      - "${GATEWAY1_PORT}:${GATEWAY1_PORT}"
+
+  gateway2:
+    build: .
+    container_name: gateway2
+    environment:
+      PORT: ${GATEWAY2_PORT}
+      GATEWAY_NAME: ${GATEWAY2_NAME}
+      FAIL_RATE: ${GATEWAY2_FAIL_RATE}
+      TOKEN: ${TOKEN}
+      SECRET: ${SECRET}
+    ports:
+      - "${GATEWAY2_PORT}:${GATEWAY2_PORT}"

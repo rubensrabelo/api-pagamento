@@ -15,18 +15,27 @@ export type ScannedRoutes = {
     'clients.client.store': { paramsTuple?: []; params?: {} }
     'clients.client.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'clients.client.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'transactions.transaction.index': { paramsTuple?: []; params?: {} }
+    'transactions.transaction.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'transactions.transaction.store': { paramsTuple?: []; params?: {} }
+    'transactions.transaction.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'transactions.transaction.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   GET: {
     'profile.profile.show': { paramsTuple?: []; params?: {} }
     'products.product.index': { paramsTuple?: []; params?: {} }
     'clients.client.index': { paramsTuple?: []; params?: {} }
     'clients.client.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'transactions.transaction.index': { paramsTuple?: []; params?: {} }
+    'transactions.transaction.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   HEAD: {
     'profile.profile.show': { paramsTuple?: []; params?: {} }
     'products.product.index': { paramsTuple?: []; params?: {} }
     'clients.client.index': { paramsTuple?: []; params?: {} }
     'clients.client.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'transactions.transaction.index': { paramsTuple?: []; params?: {} }
+    'transactions.transaction.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   POST: {
     'auth.new_account.store': { paramsTuple?: []; params?: {} }
@@ -34,12 +43,15 @@ export type ScannedRoutes = {
     'auth.access_token.destroy': { paramsTuple?: []; params?: {} }
     'products.product.store': { paramsTuple?: []; params?: {} }
     'clients.client.store': { paramsTuple?: []; params?: {} }
+    'transactions.transaction.store': { paramsTuple?: []; params?: {} }
   }
   PUT: {
     'clients.client.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'transactions.transaction.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   DELETE: {
     'clients.client.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'transactions.transaction.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {

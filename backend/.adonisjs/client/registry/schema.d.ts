@@ -139,4 +139,64 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client_controller').default['destroy']>>>
     }
   }
+  'transactions.transaction.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/transactions'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['index']>>>
+    }
+  }
+  'transactions.transaction.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/transactions/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['show']>>>
+    }
+  }
+  'transactions.transaction.store': {
+    methods: ["POST"]
+    pattern: '/api/v1/transactions'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/transaction_validator').createTransactionValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/transaction_validator').createTransactionValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'transactions.transaction.update': {
+    methods: ["PUT"]
+    pattern: '/api/v1/transactions/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/transaction_validator').updateTransactionValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/transaction_validator').updateTransactionValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'transactions.transaction.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/transactions/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['destroy']>>>
+    }
+  }
 }

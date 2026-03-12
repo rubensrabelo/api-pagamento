@@ -4,9 +4,7 @@
  * Run "node ace migration:run" command to re-generate this file
  */
 
-import TransactionProduct from '#models/transaction_product'
-import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
-import type { HasMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class AuthAccessTokenSchema extends BaseModel {
@@ -119,9 +117,6 @@ export class TransactionSchema extends BaseModel {
   declare status: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
-
-  @hasMany(() => TransactionProduct, { foreignKey: 'transactionId' })
-  declare products?: HasMany<typeof TransactionProduct>
 }
 
 export class UserSchema extends BaseModel {

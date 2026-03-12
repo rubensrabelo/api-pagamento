@@ -3,6 +3,9 @@ import TransactionProduct from '#models/transaction_product'
 import TransactionTransformer from '#transformers/transaction_transformer'
 import { createTransactionValidator, updateTransactionValidator } from '#validators/transaction_validator'
 import type { HttpContext } from '@adonisjs/core/http'
+import { Gateway1 } from '../Gateways/Gateway1.ts'
+import { Gateway2 } from '../Gateways/Gateway2.ts'
+import Client from '#models/client'
 
 export default class TransactionsController {
   async index({ serialize }: HttpContext) {
@@ -38,10 +41,38 @@ export default class TransactionsController {
       })
     }
 
+    let gateway
+
+    if (data.gateway === 'gateway1') {
+      gateway = new Gateway1()
+    } else {
+      gateway = new Gateway2()
+    }
+
+    const client = await Client.findOrFail(data.clientId)
+
+    const result = await gateway.charge({
+      amount: data.amount,
+      name: client.name!,
+      email: client.email,
+      cardNumber: data.cardNumber,
+      cvv: data.cvv,
+    })
+
+    if (result.success) {
+      transaction.status = 'SUCCESS'
+      transaction.externalId = result.external_id!
+    } else {
+      transaction.status = 'FAILED'
+    }
+
+    await transaction.save()
+
     await transaction.refresh()
     await transaction.load('products')
 
     response.status(201)
+
     return serialize(TransactionTransformer.transform(transaction))
   }
 
