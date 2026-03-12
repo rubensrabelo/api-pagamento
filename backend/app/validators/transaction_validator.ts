@@ -4,7 +4,6 @@ export const createTransactionValidator = vine.compile(
   vine.object({
     clientId: vine.number(),
     gateway: vine.string(),
-    amount: vine.number(),
     cardLastNumbers: vine.string().fixedLength(4),
 
     cardNumber: vine.string().minLength(16),

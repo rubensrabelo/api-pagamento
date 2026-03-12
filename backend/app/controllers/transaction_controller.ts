@@ -6,6 +6,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import { Gateway1 } from '../Gateways/Gateway1.ts'
 import { Gateway2 } from '../Gateways/Gateway2.ts'
 import Client from '#models/client'
+import Product from '#models/product'
 
 export default class TransactionsController {
   async index({ serialize }: HttpContext) {
@@ -25,19 +26,36 @@ export default class TransactionsController {
   async store({ request, response, serialize }: HttpContext) {
     const data = await request.validateUsing(createTransactionValidator)
 
+    const productIds = data.products.map((p) => p.productId)
+    const products = await Product.query().whereIn('id', productIds)
+
+    let total = 0
+
+    for (const item of data.products) {
+      const product = products.find((p) => p.id === item.productId)
+
+      if (!product) {
+        return response.badRequest({
+          message: 'Produto não encontrado',
+        })
+      }
+
+      total += product.amount * item.quantity
+    }
+
     const transaction = await Transaction.create({
       clientId: data.clientId,
       gateway: data.gateway,
-      amount: data.amount,
+      amount: total,
       cardLastNumbers: data.cardLastNumbers,
       status: 'PENDING',
     })
 
-    for (const product of data.products) {
+    for (const item of data.products) {
       await TransactionProduct.create({
         transactionId: transaction.id,
-        productId: product.productId,
-        quantity: product.quantity,
+        productId: item.productId,
+        quantity: item.quantity,
       })
     }
 
@@ -52,7 +70,7 @@ export default class TransactionsController {
     const client = await Client.findOrFail(data.clientId)
 
     const result = await gateway.charge({
-      amount: data.amount,
+      amount: total,
       name: client.name!,
       email: client.email,
       cardNumber: data.cardNumber,
@@ -78,6 +96,7 @@ export default class TransactionsController {
 
   async update({ params, request, serialize }: HttpContext) {
     const transaction = await Transaction.findOrFail(params.id)
+
     const data = await request.validateUsing(updateTransactionValidator)
 
     transaction.merge(data)
@@ -90,6 +109,7 @@ export default class TransactionsController {
   async destroy({ params }: HttpContext) {
     const transaction = await Transaction.findOrFail(params.id)
     await transaction.delete()
+
     return { success: true }
   }
 }
