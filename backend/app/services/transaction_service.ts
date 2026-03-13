@@ -2,8 +2,8 @@ import Transaction from '#models/transaction'
 import TransactionProduct from '#models/transaction_product'
 import Client from '#models/client'
 import Product from '#models/product'
-import { Gateway1 } from '../Gateways/Gateway1.ts'
-import { Gateway2 } from '../Gateways/Gateway2.ts'
+import { Gateway1 } from '../gateways/Gateway1.ts'
+import { Gateway2 } from '../gateways/Gateway2.ts'
 import {
   CreateTransactionDTO,
   UpdateTransactionDTO,

@@ -1,7 +1,7 @@
 import Gateway from "#models/gateway"
-import { Gateway1 } from "../Gateways/Gateway1.ts"
-import { Gateway2 } from "../Gateways/Gateway2.ts"
-import { IGateway } from "../Gateways/interfaces/IGateway.ts"
+import { Gateway1 } from "../gateways/Gateway1.ts"
+import { Gateway2 } from "../gateways/Gateway2.ts"
+import { IGateway } from "../gateways/interfaces/IGateway.ts"
 import { PaymentChargeDTO, PaymentResultDTO, RefundResultDTO } from '../dtos/payment_dto.ts'
 
 export class PaymentService {
