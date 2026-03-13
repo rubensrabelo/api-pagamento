@@ -1,3 +1,5 @@
+import User from "#models/user"
+
 export interface CreateUserDTO {
   fullName: string
   email: string
@@ -10,17 +12,25 @@ export interface LoginUserDTO {
 }
 
 export interface UserWithTokenDTO {
-  user: {
-    id: number
-    fullName: string | null
-    email: string
-    createdAt: Date
-    updatedAt: Date
-    initials?: string
-  }
+  user: User,
   token: string
+}
+
+export interface UserProfileDTO {
+  id: number
+  fullName: string
+  email: string
+  role: string
+  createdAt: Date
+  updatedAt: Date
+  initials?: string
+}
+
+export interface UserProfileResponseDTO {
+  data: UserProfileDTO
 }
 
 export interface LogoutDTO {
   message: string
 }
+

@@ -9,7 +9,7 @@ export default class AccessTokenController {
   async store({ request, serialize }: HttpContext) {
     const { email, password } = await request.validateUsing(loginValidator)
 
-    const { user, token } = await this.authService.login(email, password)
+    const { user, token } = await this.authService.login({ email, password })
 
     return serialize({
       user: UserTransformer.transform(user),

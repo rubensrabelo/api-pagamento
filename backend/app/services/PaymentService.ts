@@ -2,6 +2,7 @@ import Gateway from "#models/gateway"
 import { Gateway1 } from "../Gateways/Gateway1.ts"
 import { Gateway2 } from "../Gateways/Gateway2.ts"
 import { IGateway } from "../Gateways/interfaces/IGateway.ts"
+import { PaymentChargeDTO, PaymentResultDTO, RefundResultDTO } from '../dtos/payment_dto.ts'
 
 export class PaymentService {
   private gateways: IGateway[] = []
@@ -17,7 +18,7 @@ export class PaymentService {
     }
   }
 
-  async charge(data: any) {
+  async charge(data: PaymentChargeDTO): Promise<PaymentResultDTO> {
     for (const gateway of this.gateways) {
       const result = await gateway.charge(data)
       if (result.success) return result
@@ -25,7 +26,7 @@ export class PaymentService {
     return { success: false, message: 'All gateways failed' }
   }
 
-  async refund(external_id: string) {
+  async refund(external_id: string): Promise<RefundResultDTO> {
     for (const gateway of this.gateways) {
       const result = await gateway.refund(external_id)
       if (result.success) return result
