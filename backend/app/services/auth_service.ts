@@ -1,12 +1,18 @@
 import User from '#models/user'
 import { DateTime } from 'luxon'
 import { LoginUserDTO, LogoutDTO, UserWithTokenDTO } from '../dtos/user_dto.ts'
+import { Exception } from '@adonisjs/core/exceptions'
+import UserDisabledException from '#exceptions/user_disabled_exception'
 
 export default class AuthService {
   async login(data: LoginUserDTO): Promise<UserWithTokenDTO> {
     const user = await User.verifyCredentials(
       data.email, data.password
     )
+
+    if (!user.isActive) {
+      throw new UserDisabledException()
+    }
 
     const token = await User.accessTokens.create(user)
 
