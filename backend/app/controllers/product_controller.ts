@@ -5,9 +5,11 @@ import {
   updateProductValidator,
 } from '#validators/product_validator'
 import ProductTransformer from '#transformers/product_transformer'
+import { inject } from '@adonisjs/core'
 
+@inject()
 export default class ProductsController {
-  private productService = new ProductService()
+  constructor(private productService: ProductService) {}
 
   async index({ serialize }: HttpContext) {
     const products = await this.productService.getAll()

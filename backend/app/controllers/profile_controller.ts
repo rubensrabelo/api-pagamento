@@ -3,9 +3,11 @@ import type { HttpContext } from '@adonisjs/core/http'
 import UserTransformer from '#transformers/user_transformer'
 import { updateProfileValidator } from '#validators/user'
 import ProfileService from '#services/profile_service.ts'
+import { inject } from '@adonisjs/core'
 
+@inject()
 export default class ProfileController {
-  private profileService = new ProfileService()
+  constructor(private profileService: ProfileService) {}
 
   async show({ auth, serialize }: HttpContext) {
     const user = auth.getUserOrFail()

@@ -4,9 +4,11 @@ import TransactionTransformer from '#transformers/transaction_transformer'
 import { createTransactionValidator, updateTransactionValidator } from '#validators/transaction_validator'
 import { GatewayType } from '../types/GatewayType.ts'
 import { TransactionInput } from '../types/TransactionInput.ts'
+import { inject } from '@adonisjs/core'
 
+@inject()
 export default class TransactionsController {
-  private transactionService = new TransactionService()
+  constructor(private transactionService: TransactionService) {}
 
   async index({ serialize }: HttpContext) {
     const transactions = await this.transactionService.getAll()

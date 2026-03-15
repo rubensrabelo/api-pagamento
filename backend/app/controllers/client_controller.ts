@@ -5,11 +5,12 @@ import {
   createClientValidator,
   updateClientValidator,
 } from '#validators/client_validator'
-
 import ClientTransformer from '#transformers/client_transformer'
+import { inject } from '@adonisjs/core'
 
+@inject()
 export default class ClientsController {
-  private clientService = new ClientService()
+  constructor(private clientService: ClientService) {}
 
   async index({ serialize }: HttpContext) {
     const clients = await this.clientService.getAll()

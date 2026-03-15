@@ -2,9 +2,11 @@ import type { HttpContext } from '@adonisjs/core/http'
 import { loginValidator } from '#validators/user'
 import AuthService from '#services/auth_service'
 import UserTransformer from '#transformers/user_transformer'
+import { inject } from '@adonisjs/core'
 
+@inject()
 export default class AccessTokenController {
-  private authService = new AuthService()
+  constructor (private authService: AuthService) {}
 
   async store({ request, serialize }: HttpContext) {
     const { email, password } = await request.validateUsing(loginValidator)
