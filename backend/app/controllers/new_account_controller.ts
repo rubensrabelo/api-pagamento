@@ -3,6 +3,7 @@ import { signupValidator } from '#validators/user'
 import AccountService from '#services/account_service'
 import UserTransformer from '#transformers/user_transformer'
 import { inject } from '@adonisjs/core'
+import { RoleUserType } from '../types/RoleUserType.ts'
 
 @inject()
 export default class NewAccountController {
@@ -14,7 +15,7 @@ export default class NewAccountController {
     const { user, token } = await this.accountService.createAccount({
       fullName: data.fullName ?? '',
       email: data.email,
-      role: data.role,
+      role: data.role as RoleUserType,
       password: data.password,
     })
 
