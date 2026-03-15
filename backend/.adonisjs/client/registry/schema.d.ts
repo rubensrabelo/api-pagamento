@@ -247,16 +247,4 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'transactions.transaction.destroy': {
-    methods: ["DELETE"]
-    pattern: '/api/v1/transactions/:id'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['destroy']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['destroy']>>>
-    }
-  }
 }
