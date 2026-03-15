@@ -1,0 +1,1 @@
+export type GatewayType = 'gateway1' | 'gateway2'

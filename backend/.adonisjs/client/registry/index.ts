@@ -36,11 +36,29 @@ const routes = {
     tokens: [{"old":"/api/v1/products","type":0,"val":"api","end":""},{"old":"/api/v1/products","type":0,"val":"v1","end":""},{"old":"/api/v1/products","type":0,"val":"products","end":""}],
     types: placeholder as Registry['products.product.index']['types'],
   },
+  'products.product.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/products/:id',
+    tokens: [{"old":"/api/v1/products/:id","type":0,"val":"api","end":""},{"old":"/api/v1/products/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/products/:id","type":0,"val":"products","end":""},{"old":"/api/v1/products/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['products.product.show']['types'],
+  },
   'products.product.store': {
     methods: ["POST"],
     pattern: '/api/v1/products',
     tokens: [{"old":"/api/v1/products","type":0,"val":"api","end":""},{"old":"/api/v1/products","type":0,"val":"v1","end":""},{"old":"/api/v1/products","type":0,"val":"products","end":""}],
     types: placeholder as Registry['products.product.store']['types'],
+  },
+  'products.product.update': {
+    methods: ["PUT"],
+    pattern: '/api/v1/products/:id',
+    tokens: [{"old":"/api/v1/products/:id","type":0,"val":"api","end":""},{"old":"/api/v1/products/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/products/:id","type":0,"val":"products","end":""},{"old":"/api/v1/products/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['products.product.update']['types'],
+  },
+  'products.product.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/products/:id',
+    tokens: [{"old":"/api/v1/products/:id","type":0,"val":"api","end":""},{"old":"/api/v1/products/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/products/:id","type":0,"val":"products","end":""},{"old":"/api/v1/products/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['products.product.destroy']['types'],
   },
   'clients.client.index': {
     methods: ["GET","HEAD"],

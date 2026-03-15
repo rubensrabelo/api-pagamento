@@ -37,12 +37,15 @@ router
     router
       .group(() => {
         router.get('/', [controllers.Product, 'index'])
+        router.get('/:id', [controllers.Product, 'show'])
         router.post('/', [controllers.Product, 'store'])
+        router.put('/:id', [controllers.Product, 'update'])
+        router.delete('/:id', [controllers.Product, 'destroy'])
       })
       .prefix('products')
       .as('products')
       .use(middleware.auth())
-    
+
     router
       .group(() => {
         router.get('/', [controllers.Client, 'index'])

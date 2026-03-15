@@ -1,7 +1,9 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { TransactionService, TransactionInput, GatewayType } from '#services/transaction_service'
+import { TransactionService } from '#services/transaction_service'
 import TransactionTransformer from '#transformers/transaction_transformer'
 import { createTransactionValidator, updateTransactionValidator } from '#validators/transaction_validator'
+import { GatewayType } from '../types/GatewayType.ts'
+import { TransactionInput } from '../types/TransactionInput.ts'
 
 export default class TransactionsController {
   private transactionService = new TransactionService()

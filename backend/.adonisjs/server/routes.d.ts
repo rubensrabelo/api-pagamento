@@ -9,7 +9,10 @@ export type ScannedRoutes = {
     'auth.access_token.destroy': { paramsTuple?: []; params?: {} }
     'profile.profile.show': { paramsTuple?: []; params?: {} }
     'products.product.index': { paramsTuple?: []; params?: {} }
+    'products.product.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'products.product.store': { paramsTuple?: []; params?: {} }
+    'products.product.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.product.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'clients.client.index': { paramsTuple?: []; params?: {} }
     'clients.client.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'clients.client.store': { paramsTuple?: []; params?: {} }
@@ -24,6 +27,7 @@ export type ScannedRoutes = {
   GET: {
     'profile.profile.show': { paramsTuple?: []; params?: {} }
     'products.product.index': { paramsTuple?: []; params?: {} }
+    'products.product.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'clients.client.index': { paramsTuple?: []; params?: {} }
     'clients.client.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'transactions.transaction.index': { paramsTuple?: []; params?: {} }
@@ -32,6 +36,7 @@ export type ScannedRoutes = {
   HEAD: {
     'profile.profile.show': { paramsTuple?: []; params?: {} }
     'products.product.index': { paramsTuple?: []; params?: {} }
+    'products.product.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'clients.client.index': { paramsTuple?: []; params?: {} }
     'clients.client.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'transactions.transaction.index': { paramsTuple?: []; params?: {} }
@@ -46,10 +51,12 @@ export type ScannedRoutes = {
     'transactions.transaction.store': { paramsTuple?: []; params?: {} }
   }
   PUT: {
+    'products.product.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'clients.client.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'transactions.transaction.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   DELETE: {
+    'products.product.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'clients.client.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'transactions.transaction.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
