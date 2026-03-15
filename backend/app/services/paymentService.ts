@@ -8,6 +8,8 @@ export class PaymentService {
   private gateways: IGateway[] = []
 
   async init() {
+    this.gateways = []
+    
     const activeGateways = await Gateway.query()
       .where('is_active', true)
       .orderBy('priority', 'asc')

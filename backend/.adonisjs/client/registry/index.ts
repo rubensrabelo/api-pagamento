@@ -102,6 +102,18 @@ const routes = {
     tokens: [{"old":"/api/v1/clients/:id","type":0,"val":"api","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"clients","end":""},{"old":"/api/v1/clients/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['clients.client.destroy']['types'],
   },
+  'gateway.toggle': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/gateways/:id/toggle',
+    tokens: [{"old":"/api/v1/gateways/:id/toggle","type":0,"val":"api","end":""},{"old":"/api/v1/gateways/:id/toggle","type":0,"val":"v1","end":""},{"old":"/api/v1/gateways/:id/toggle","type":0,"val":"gateways","end":""},{"old":"/api/v1/gateways/:id/toggle","type":1,"val":"id","end":""},{"old":"/api/v1/gateways/:id/toggle","type":0,"val":"toggle","end":""}],
+    types: placeholder as Registry['gateway.toggle']['types'],
+  },
+  'gateway.update_priority': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/gateways/:id/priority',
+    tokens: [{"old":"/api/v1/gateways/:id/priority","type":0,"val":"api","end":""},{"old":"/api/v1/gateways/:id/priority","type":0,"val":"v1","end":""},{"old":"/api/v1/gateways/:id/priority","type":0,"val":"gateways","end":""},{"old":"/api/v1/gateways/:id/priority","type":1,"val":"id","end":""},{"old":"/api/v1/gateways/:id/priority","type":0,"val":"priority","end":""}],
+    types: placeholder as Registry['gateway.update_priority']['types'],
+  },
   'transactions.transaction.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/transactions',

@@ -199,6 +199,30 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client_controller').default['destroy']>>>
     }
   }
+  'gateway.toggle': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/gateways/:id/toggle'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/gateway_controller').default['toggle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/gateway_controller').default['toggle']>>>
+    }
+  }
+  'gateway.update_priority': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/gateways/:id/priority'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/gateway_controller').default['updatePriority']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/gateway_controller').default['updatePriority']>>>
+    }
+  }
   'transactions.transaction.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/transactions'

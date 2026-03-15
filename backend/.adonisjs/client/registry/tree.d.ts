@@ -36,6 +36,10 @@ export interface ApiDefinition {
       destroy: typeof routes['clients.client.destroy']
     }
   }
+  gateway: {
+    toggle: typeof routes['gateway.toggle']
+    updatePriority: typeof routes['gateway.update_priority']
+  }
   transactions: {
     transaction: {
       index: typeof routes['transactions.transaction.index']

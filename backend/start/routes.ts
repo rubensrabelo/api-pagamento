@@ -84,6 +84,18 @@ router
       .prefix('clients')
       .as('clients')
       .use(middleware.auth())
+    
+    router
+      .group(() => {
+
+        router.patch('/:id/toggle', [controllers.Gateway, 'toggle'])
+
+        router.patch('/:id/priority', [controllers.Gateway, 'updatePriority'])
+
+      })
+      .prefix('gateways')
+      .use(middleware.auth())
+      .use(middleware.role(['ADMIN']))
 
     router
       .group(() => {
