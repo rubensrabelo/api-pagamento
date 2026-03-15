@@ -2,6 +2,7 @@ import { IGateway } from "./interfaces/IGateway.ts"
 import { ChargeResponse, RefundResponse } from "./interfaces/IGatewayResponse.ts"
 
 export class Gateway1 implements IGateway {
+  private name = 'Gateway1'
   private baseUrl = 'http://localhost:3001'
   private headers = {
     'Gateway-Auth-Token': 'tk_f2198cc671b5289fa856',
@@ -20,12 +21,12 @@ export class Gateway1 implements IGateway {
       const json = (await res.json()) as Partial<ChargeResponse>
 
       if (res.ok && json.id) {
-        return { success: true, external_id: json.id }
+        return { success: true, external_id: json.id, gatewayName: this.name }
       }
 
-      return { success: false, message: json.message || 'Erro desconhecido' }
+      return { success: false, message: json.message || 'Erro desconhecido', gatewayName: this.name }
     } catch (err: any) {
-      return { success: false, message: err.message }
+      return { success: false, message: err.message, gatewayName: this.name }
     }
   }
 
@@ -37,12 +38,12 @@ export class Gateway1 implements IGateway {
         body: JSON.stringify({ id: external_id }),
       })
 
-      if (res.ok) return { success: true }
+      if (res.ok) return { success: true, gatewayName: this.name }
 
       const json = (await res.json()) as Partial<RefundResponse>
-      return { success: false, message: json.message || 'Erro desconhecido' }
+      return { success: false, message: json.message || 'Erro desconhecido', gatewayName: this.name  }
     } catch (err: any) {
-      return { success: false, message: err.message }
+      return { success: false, message: err.message, gatewayName: this.name  }
     }
   }
 }

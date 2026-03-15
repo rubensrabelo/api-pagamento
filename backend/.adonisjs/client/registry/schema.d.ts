@@ -247,6 +247,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['show']>>>
     }
   }
+  'transactions.transaction.refund': {
+    methods: ["POST"]
+    pattern: '/api/v1/transactions/:id/refund'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['refund']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/transaction_controller').default['refund']>>>
+    }
+  }
   'transactions.transaction.store': {
     methods: ["POST"]
     pattern: '/api/v1/transactions'

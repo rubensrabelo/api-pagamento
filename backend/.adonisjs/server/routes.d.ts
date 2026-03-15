@@ -24,6 +24,7 @@ export type ScannedRoutes = {
     'gateway.update_priority': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'transactions.transaction.index': { paramsTuple?: []; params?: {} }
     'transactions.transaction.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'transactions.transaction.refund': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'transactions.transaction.store': { paramsTuple?: []; params?: {} }
     'transactions.transaction.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
@@ -51,6 +52,7 @@ export type ScannedRoutes = {
     'auth.access_token.destroy': { paramsTuple?: []; params?: {} }
     'products.product.store': { paramsTuple?: []; params?: {} }
     'clients.client.store': { paramsTuple?: []; params?: {} }
+    'transactions.transaction.refund': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'transactions.transaction.store': { paramsTuple?: []; params?: {} }
   }
   PUT: {

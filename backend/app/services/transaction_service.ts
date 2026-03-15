@@ -4,7 +4,7 @@ import Client from '#models/client'
 import Product from '#models/product'
 import { CreateTransactionDTO, UpdateTransactionDTO, TransactionStatus } from '../dtos/transaction_dto.ts'
 import { inject } from '@adonisjs/core'
-import { PaymentService } from './paymentService.ts'
+import { PaymentService } from './payment_service.ts'
 
 @inject()
 export class TransactionService {
@@ -22,19 +22,22 @@ export class TransactionService {
     const productIds = data.products.map((p) => p.productId)
     const products = await Product.query().whereIn('id', productIds)
     let total = 0
+
     for (const item of data.products) {
       const product = products.find((p) => p.id === item.productId)
       if (!product) throw new Error(`Produto ${item.productId} não encontrado`)
       total += product.amount * item.quantity
     }
 
-    const transaction = await Transaction.create({
-      clientId: data.clientId,
-      amount: total,
-      cardLastNumbers: data.cardLastNumbers ?? '',
-      status: 'PENDING' as TransactionStatus,
+    const transaction = await Transaction.create({ 
+      clientId: data.clientId, 
+      gateway: data.gateway, // valor inicial, será atualizado depois
+      amount: total, 
+      cardLastNumbers: data.cardLastNumbers ?? '', 
+      status: 'PENDING' as TransactionStatus, 
     })
 
+    // Cria os itens da transação
     for (const item of data.products) {
       await TransactionProduct.create({
         transactionId: transaction.id,
@@ -44,11 +47,9 @@ export class TransactionService {
     }
 
     await transaction.load('products')
-
     const client = await Client.findOrFail(data.clientId)
 
-    await this.paymentService.init()
-
+    // Remove init() – o PaymentService agora consulta gateways a cada chamada
     const result = await this.paymentService.charge({
       amount: total,
       name: client.name ?? 'Cliente',
@@ -57,8 +58,10 @@ export class TransactionService {
       cvv: data.cvv,
     })
 
+    // Atualiza status e gateway
     transaction.status = result.success ? 'SUCCESS' : 'FAILED'
     transaction.externalId = result.external_id ?? null
+    transaction.gateway = result.gatewayName ?? data.gateway
 
     await transaction.save()
     await transaction.refresh()
@@ -79,14 +82,18 @@ export class TransactionService {
     const transaction = await Transaction.findOrFail(id)
     if (!transaction.externalId) throw new Error('Transação não possui external_id')
 
-    await this.paymentService.init()
-
+    // Não precisa mais init()
     const result = await this.paymentService.refund(transaction.externalId)
-    if (result.success) transaction.status = 'REFUNDED'
+
+    if (result.success) {
+      transaction.status = 'REFUNDED'
+      transaction.gateway = result.gatewayName ?? transaction.gateway
+    }
 
     await transaction.save()
     await transaction.refresh()
     await transaction.load('products')
+
     return transaction
   }
 }

@@ -13,10 +13,12 @@ export interface PaymentResultDTO {
   success: boolean
   external_id?: string
   message?: string
+  gatewayName?: string
 }
 
 export interface RefundResultDTO {
   success: boolean
   message?: string
   refundedAt?: Date
+  gatewayName?: string
 }

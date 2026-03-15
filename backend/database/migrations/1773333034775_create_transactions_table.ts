@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.integer('client_id').unsigned().references('id').inTable('clients').notNullable()
       table.string('gateway').notNullable()
       table.string('external_id').nullable()
-      table.enum('status', ['PENDING', 'SUCCESS', 'FAILED']).defaultTo('PENDING')
+      table.enum('status', ['PENDING', 'SUCCESS', 'FAILED', 'REFUNDED']).defaultTo('PENDING')
       table.integer('amount').notNullable()
       table.string('card_last_numbers', 4).nullable()
 
