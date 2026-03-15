@@ -3,13 +3,15 @@ import { Gateway1 } from "../gateways/Gateway1.ts"
 import { Gateway2 } from "../gateways/Gateway2.ts"
 import { IGateway } from "../gateways/interfaces/IGateway.ts"
 import { PaymentChargeDTO, PaymentResultDTO, RefundResultDTO } from '../dtos/payment_dto.ts'
+import { inject } from "@adonisjs/core"
 
+@inject()
 export class PaymentService {
-  private gateways: IGateway[] = []
+  constructor(private gateways: IGateway[]) {}
 
   async init() {
     this.gateways = []
-    
+
     const activeGateways = await Gateway.query()
       .where('is_active', true)
       .orderBy('priority', 'asc')
@@ -22,16 +24,22 @@ export class PaymentService {
 
   async charge(data: PaymentChargeDTO): Promise<PaymentResultDTO> {
     for (const gateway of this.gateways) {
-      const result = await gateway.charge(data)
-      if (result.success) return result
+      try {
+        const result = await gateway.charge(data)
+        if (result.success) return result
+      } catch (err) {
+      }
     }
     return { success: false, message: 'All gateways failed' }
   }
 
   async refund(external_id: string): Promise<RefundResultDTO> {
     for (const gateway of this.gateways) {
-      const result = await gateway.refund(external_id)
-      if (result.success) return result
+      try {
+        const result = await gateway.refund(external_id)
+        if (result.success) return result
+      } catch (err) {
+      }
     }
     return { success: false, message: 'Refund failed on all gateways' }
   }

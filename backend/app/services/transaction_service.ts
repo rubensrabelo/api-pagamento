@@ -2,29 +2,25 @@ import Transaction from '#models/transaction'
 import TransactionProduct from '#models/transaction_product'
 import Client from '#models/client'
 import Product from '#models/product'
-import { Gateway1 } from '../gateways/Gateway1.ts'
-import { Gateway2 } from '../gateways/Gateway2.ts'
-import {
-  CreateTransactionDTO,
-  UpdateTransactionDTO,
-  TransactionStatus,
-} from '../dtos/transaction_dto.ts'
+import { CreateTransactionDTO, UpdateTransactionDTO, TransactionStatus } from '../dtos/transaction_dto.ts'
+import { inject } from '@adonisjs/core'
+import { PaymentService } from './paymentService.ts'
 
+@inject()
 export class TransactionService {
+  constructor(private paymentService: PaymentService) {}
+
   async getAll(): Promise<Transaction[]> {
-    const transactions = await Transaction.query().preload('products')
-    return transactions
+    return await Transaction.query().preload('products')
   }
 
   async getById(id: number): Promise<Transaction> {
-    const transaction = await Transaction.query().where('id', id).preload('products').firstOrFail()
-    return transaction
+    return await Transaction.query().where('id', id).preload('products').firstOrFail()
   }
 
   async create(data: CreateTransactionDTO): Promise<Transaction> {
     const productIds = data.products.map((p) => p.productId)
     const products = await Product.query().whereIn('id', productIds)
-
     let total = 0
     for (const item of data.products) {
       const product = products.find((p) => p.id === item.productId)
@@ -34,7 +30,6 @@ export class TransactionService {
 
     const transaction = await Transaction.create({
       clientId: data.clientId,
-      gateway: data.gateway,
       amount: total,
       cardLastNumbers: data.cardLastNumbers ?? '',
       status: 'PENDING' as TransactionStatus,
@@ -48,10 +43,13 @@ export class TransactionService {
       })
     }
 
-    const gatewayInstance = data.gateway.toLowerCase() === 'gateway1' ? new Gateway1() : new Gateway2()
+    await transaction.load('products')
+
     const client = await Client.findOrFail(data.clientId)
 
-    const result = await gatewayInstance.charge({
+    await this.paymentService.init()
+
+    const result = await this.paymentService.charge({
       amount: total,
       name: client.name ?? 'Cliente',
       email: client.email,
@@ -73,6 +71,21 @@ export class TransactionService {
     const transaction = await Transaction.findOrFail(id)
     transaction.merge(data)
     await transaction.save()
+    await transaction.load('products')
+    return transaction
+  }
+
+  async refund(id: number): Promise<Transaction> {
+    const transaction = await Transaction.findOrFail(id)
+    if (!transaction.externalId) throw new Error('Transação não possui external_id')
+
+    await this.paymentService.init()
+
+    const result = await this.paymentService.refund(transaction.externalId)
+    if (result.success) transaction.status = 'REFUNDED'
+
+    await transaction.save()
+    await transaction.refresh()
     await transaction.load('products')
     return transaction
   }

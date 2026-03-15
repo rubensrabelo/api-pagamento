@@ -45,4 +45,9 @@ export default class TransactionsController {
     const transaction = await this.transactionService.update(params.id, data)
     return serialize(TransactionTransformer.transform(transaction))
   }
+
+  async refund({ params, serialize }: HttpContext) {
+    const transaction = await this.transactionService.refund(params.id)
+    return serialize(TransactionTransformer.transform(transaction))
+  }
 }

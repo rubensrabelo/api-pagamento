@@ -104,6 +104,10 @@ router
         router.get('/:id', [controllers.Transaction, 'show'])
 
         router
+          .post('/:id/refund', [controllers.Transaction, 'refund'])
+          .use(middleware.role(['ADMIN', 'FINANCE']))
+
+        router
           .post('/', [controllers.Transaction, 'store'])
           .use(middleware.role(['ADMIN', 'FINANCE']))
 

@@ -1,9 +1,10 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { GatewayService } from '#services/gateway_service'
+import { inject } from '@adonisjs/core'
 
+@inject()
 export default class GatewayController {
-
-  private gatewayService = new GatewayService()
+  constructor(private gatewayService: GatewayService) {}
 
   async toggle({ params }: HttpContext) {
     return this.gatewayService.toggle(params.id)
