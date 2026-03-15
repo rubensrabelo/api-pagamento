@@ -28,7 +28,8 @@ router
 
     router
       .group(() => {
-        router.get('/profile', [controllers.Profile, 'show'])
+        router.get('/', [controllers.Profile, 'show'])
+        router.put('/', [controllers.Profile, 'update'])
       })
       .prefix('account')
       .as('profile')

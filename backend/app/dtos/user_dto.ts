@@ -6,6 +6,11 @@ export interface CreateUserDTO {
   password: string
 }
 
+export interface UpdateProfileDTO {
+  fullName?: string
+  email?: string
+}
+
 export interface LoginUserDTO {
   email: string
   password: string
