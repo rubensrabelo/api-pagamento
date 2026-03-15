@@ -7,6 +7,7 @@ export default class ClientTransformer extends BaseTransformer<Client> {
       'id',
       'name',
       'email',
+      'isActive',
       'createdAt',
       'updatedAt',
     ])

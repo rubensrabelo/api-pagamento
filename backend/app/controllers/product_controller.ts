@@ -39,9 +39,11 @@ export default class ProductsController {
     return serialize(ProductTransformer.transform(product))
   }
 
-  async destroy({ params }: HttpContext) {
-    await this.productService.delete(params.id)
+  async destroy({ params, response }: HttpContext) {
+    await this.productService.softDelete(params.id)
 
-    return { success: true }
+    return response.ok({
+      message: 'Product deactivated successfully',
+    })
   }
 }

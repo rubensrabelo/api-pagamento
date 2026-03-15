@@ -26,9 +26,21 @@ const routes = {
   },
   'profile.profile.show': {
     methods: ["GET","HEAD"],
-    pattern: '/api/v1/account/profile',
-    tokens: [{"old":"/api/v1/account/profile","type":0,"val":"api","end":""},{"old":"/api/v1/account/profile","type":0,"val":"v1","end":""},{"old":"/api/v1/account/profile","type":0,"val":"account","end":""},{"old":"/api/v1/account/profile","type":0,"val":"profile","end":""}],
+    pattern: '/api/v1/account',
+    tokens: [{"old":"/api/v1/account","type":0,"val":"api","end":""},{"old":"/api/v1/account","type":0,"val":"v1","end":""},{"old":"/api/v1/account","type":0,"val":"account","end":""}],
     types: placeholder as Registry['profile.profile.show']['types'],
+  },
+  'profile.profile.update': {
+    methods: ["PUT"],
+    pattern: '/api/v1/account',
+    tokens: [{"old":"/api/v1/account","type":0,"val":"api","end":""},{"old":"/api/v1/account","type":0,"val":"v1","end":""},{"old":"/api/v1/account","type":0,"val":"account","end":""}],
+    types: placeholder as Registry['profile.profile.update']['types'],
+  },
+  'profile.profile.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/account',
+    tokens: [{"old":"/api/v1/account","type":0,"val":"api","end":""},{"old":"/api/v1/account","type":0,"val":"v1","end":""},{"old":"/api/v1/account","type":0,"val":"account","end":""}],
+    types: placeholder as Registry['profile.profile.destroy']['types'],
   },
   'products.product.index': {
     methods: ["GET","HEAD"],

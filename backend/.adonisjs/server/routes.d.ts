@@ -8,6 +8,8 @@ export type ScannedRoutes = {
     'auth.access_token.store': { paramsTuple?: []; params?: {} }
     'auth.access_token.destroy': { paramsTuple?: []; params?: {} }
     'profile.profile.show': { paramsTuple?: []; params?: {} }
+    'profile.profile.update': { paramsTuple?: []; params?: {} }
+    'profile.profile.destroy': { paramsTuple?: []; params?: {} }
     'products.product.index': { paramsTuple?: []; params?: {} }
     'products.product.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'products.product.store': { paramsTuple?: []; params?: {} }
@@ -51,11 +53,13 @@ export type ScannedRoutes = {
     'transactions.transaction.store': { paramsTuple?: []; params?: {} }
   }
   PUT: {
+    'profile.profile.update': { paramsTuple?: []; params?: {} }
     'products.product.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'clients.client.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'transactions.transaction.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   DELETE: {
+    'profile.profile.destroy': { paramsTuple?: []; params?: {} }
     'products.product.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'clients.client.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'transactions.transaction.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

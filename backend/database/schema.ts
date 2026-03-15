@@ -33,7 +33,7 @@ export class AuthAccessTokenSchema extends BaseModel {
 }
 
 export class ClientSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'id', 'name', 'updatedAt'] as const
+  static $columns = ['createdAt', 'email', 'id', 'isActive', 'name', 'updatedAt'] as const
   $columns = ClientSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -41,6 +41,8 @@ export class ClientSchema extends BaseModel {
   declare email: string
   @column({ isPrimary: true })
   declare id: number
+  @column()
+  declare isActive: boolean | null
   @column()
   declare name: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
@@ -65,7 +67,7 @@ export class GatewaySchema extends BaseModel {
 }
 
 export class ProductSchema extends BaseModel {
-  static $columns = ['amount', 'createdAt', 'id', 'name', 'updatedAt'] as const
+  static $columns = ['amount', 'createdAt', 'id', 'isActive', 'name', 'updatedAt'] as const
   $columns = ProductSchema.$columns
   @column()
   declare amount: number
@@ -73,6 +75,8 @@ export class ProductSchema extends BaseModel {
   declare createdAt: DateTime | null
   @column({ isPrimary: true })
   declare id: number
+  @column()
+  declare isActive: boolean | null
   @column()
   declare name: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
@@ -120,7 +124,7 @@ export class TransactionSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'role', 'updatedAt'] as const
+  static $columns = ['createdAt', 'email', 'fullName', 'id', 'isActive', 'password', 'role', 'updatedAt'] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -130,6 +134,8 @@ export class UserSchema extends BaseModel {
   declare fullName: string | null
   @column({ isPrimary: true })
   declare id: number
+  @column()
+  declare isActive: boolean | null
   @column({ serializeAs: null })
   declare password: string
   @column()

@@ -1,6 +1,6 @@
 import vine from '@vinejs/vine'
 
-export const createTransactionValidator = vine.compile(
+export const createTransactionValidator = vine.create(
   vine.object({
     clientId: vine.number(),
     gateway: vine.string(),
@@ -18,8 +18,9 @@ export const createTransactionValidator = vine.compile(
   })
 )
 
-export const updateTransactionValidator = vine.compile(
+export const updateTransactionValidator = vine.create(
   vine.object({
-    status: vine.enum(['PENDING', 'SUCCESS', 'FAILED']),
+    cardLastNumbers: vine.string().fixedLength(4).optional(),
+    status: vine.enum(['PENDING', 'SUCCESS', 'FAILED']).optional(),
   })
 )

@@ -13,4 +13,9 @@ export default class ProfileService {
 
     return user
   }
+
+  async deactivateProfile(user: User): Promise<void> {
+    user.isActive = false
+    await user.save()
+  }
 }

@@ -24,4 +24,14 @@ export default class ProfileController {
 
     return serialize(UserTransformer.transform(profile))
   }
+
+  async destroy({ auth, response }: HttpContext) {
+    const user = auth.getUserOrFail()
+
+    await this.profileService.deactivateProfile(user)
+
+    return response.ok({
+      message: 'User deactivated successfully',
+    })
+  }
 }

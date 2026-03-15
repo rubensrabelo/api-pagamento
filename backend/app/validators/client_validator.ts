@@ -9,5 +9,5 @@ export const createClientValidator = vine.create({
 
 export const updateClientValidator = vine.create({
   name: vine.string().nullable(),
-  email: email(),
+  email: email().optional(),
 })

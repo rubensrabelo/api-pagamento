@@ -12,6 +12,7 @@ export default class NewAccountController {
     const { user, token } = await this.accountService.createAccount({
       fullName: data.fullName ?? '',
       email: data.email,
+      role: data.role,
       password: data.password,
     })
 

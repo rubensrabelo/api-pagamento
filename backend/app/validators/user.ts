@@ -31,5 +31,6 @@ export const updateProfileValidator = vine.compile(
   vine.object({
     fullName: vine.string().trim().minLength(2).optional(),
     email: vine.string().email().optional(),
+    role: role()
   })
 )

@@ -76,9 +76,4 @@ export class TransactionService {
     await transaction.load('products')
     return transaction
   }
-
-  async delete(id: number): Promise<void> {
-    const transaction = await Transaction.findOrFail(id)
-    await transaction.delete()
-  }
 }

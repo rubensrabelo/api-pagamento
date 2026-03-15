@@ -41,8 +41,10 @@ export default class ClientsController {
   }
 
   async destroy({ params, response }: HttpContext) {
-    await this.clientService.delete(params.id)
+    await this.clientService.softDelete(params.id)
 
-    return response.noContent()
+    return response.ok({
+      message: 'Client deactivated successfully',
+    })
   }
 }

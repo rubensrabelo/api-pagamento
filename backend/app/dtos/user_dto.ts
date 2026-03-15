@@ -1,14 +1,17 @@
 import User from "#models/user"
+import { RoleUserType } from "../types/RoleUserType.ts"
 
 export interface CreateUserDTO {
   fullName: string
   email: string
+  role: RoleUserType
   password: string
 }
 
 export interface UpdateProfileDTO {
   fullName?: string
   email?: string
+  role?: RoleUserType
 }
 
 export interface LoginUserDTO {

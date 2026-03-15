@@ -1,0 +1,1 @@
+export type RoleUserType = "ADMIN" | "MANAGER" | "FINANCE" | "USER"

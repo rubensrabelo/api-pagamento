@@ -30,6 +30,7 @@ router
       .group(() => {
         router.get('/', [controllers.Profile, 'show'])
         router.put('/', [controllers.Profile, 'update'])
+        router.delete('/', [controllers.Profile, 'destroy'])
       })
       .prefix('account')
       .as('profile')

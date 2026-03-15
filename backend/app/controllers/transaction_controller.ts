@@ -43,9 +43,4 @@ export default class TransactionsController {
     const transaction = await this.transactionService.update(params.id, data)
     return serialize(TransactionTransformer.transform(transaction))
   }
-
-  async destroy({ params }: HttpContext) {
-    await this.transactionService.delete(params.id)
-    return { success: true }
-  }
 }

@@ -3,7 +3,7 @@ import { CreateProductDTO, UpdateProductDTO } from '../dtos/product_dto.ts'
 
 export default class ProductService {
   async getAll(): Promise<Product[]> {
-    return await Product.all()
+    return await Product.query().where('is_active', true)
   }
 
   async getById(id: number): Promise<Product> {
@@ -24,9 +24,11 @@ export default class ProductService {
     return product
   }
 
-  async delete(id: number): Promise<void> {
-    const product = await Product.findOrFail(id)
+  async softDelete(id: number): Promise<void> {
+    const product = await this.getById(id)
 
-    await product.delete()
+    product.isActive = false
+
+    await product.save()
   }
 }
