@@ -1,10 +1,10 @@
-# API de Pagamento - AdonisJS 6
+# API de Pagamento
 
-Esta é uma API robusta de processamento de pagamentos desenvolvida com AdonisJS 6. O sistema gerencia produtos, clientes, transações financeiras e possui integração inteligente com múltiplos gateways de pagamento, suportando fallback automático e estorno (refund).
+Esta é uma API robusta de processamento de pagamentos desenvolvida com AdonisJS. O sistema gerencia produtos, clientes, transações financeiras e possui integração inteligente com múltiplos gateways de pagamento, suportando fallback automático e estorno (refund).
 
 ## Tecnologias Utilizadas
 
-* Framework: AdonisJS 6
+* Framework: AdonisJS
 * Linguagem: TypeScript
 * Banco de Dados: MySQL (via Lucid ORM)
 * Autenticação: Obeject-Based Access Tokens (API Tokens)
